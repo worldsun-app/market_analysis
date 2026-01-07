@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美國市場資訊圖表</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Oswald:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #f0f0f0;
+            --text-sub: #a0a0a0;
+            --accent-green: #00e676;
+            /* Bright Green for Up */
+            --accent-red: #ff5252;
+            /* Bright Red for Down */
+            --accent-blue: #448aff;
+            /* Info Blue */
+            --accent-gold: #ffd740;
+            /* Gold */
+            --border-color: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans TC', sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .infographic-container {
+            width: 100%;
+            max-width: 900px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        /* HEADER SECTION */
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #000000 100%);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            border-bottom: 4px solid var(--accent-blue);
+        }
+
+        .header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .header .date-badge {
+            background-color: var(--accent-blue);
+            color: #000;
+            padding: 8px 20px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-sub);
+            font-weight: 300;
+        }
+
+        .header .trend-tag {
+            margin-top: 20px;
+            display: inline-block;
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SECTION STYLING */
+        .section {
+            padding: 40px 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-main);
+        }
+
+        .section-title i {
+            color: var(--accent-blue);
+        }
+
+        /* GRID SYSTEMS */
+        .indices-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .index-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border-left: 4px solid var(--text-sub);
+            transition: transform 0.2s;
+        }
+
+        .index-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .index-card.down {
+            border-left-color: var(--accent-red);
+        }
+
+        .index-card.up {
+            border-left-color: var(--accent-green);
+        }
+
+        .index-name {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .index-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .index-change {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+
+        .text-red {
+            color: var(--accent-red);
+        }
+
+        .text-green {
+            color: var(--accent-green);
+        }
+
+        .text-sub {
+            color: var(--text-sub);
+        }
+
+        /* SECTOR FLEX */
+        .sector-flex {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .sector-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .sector-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+
+        .sector-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .bg-green-soft {
+            background-color: rgba(0, 230, 118, 0.1);
+            color: var(--accent-green);
+        }
+
+        .bg-red-soft {
+            background-color: rgba(255, 82, 82, 0.1);
+            color: var(--accent-red);
+        }
+
+        /* MOVERS GRID */
+        .movers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .mover-card {
+            background-color: #252525;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #333;
+        }
+
+        .mover-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .mover-symbol {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .mover-change {
+            font-size: 1.3rem;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+        }
+
+        .mover-reason {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            line-height: 1.4;
+        }
+
+        /* STORY / RECAP */
+        .story-container {
+            background-color: rgba(68, 138, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(68, 138, 255, 0.2);
+        }
+
+        .story-headline {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+        }
+
+        .story-points {
+            list-style: none;
+        }
+
+        .story-points li {
+            margin-bottom: 15px;
+            padding-left: 0;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: #fff;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #000;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* PRINT */
+        @media print {
+            body {
+                padding: 0;
+                background-color: #121212 !important;
+            }
+
+            .infographic-container {
+                box-shadow: none;
+                border: none;
+                max-width: none;
+                border-radius: 0;
+            }
+
+            .section,
+            .index-card,
+            .story-container,
+            .mover-card {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="infographic-container">
+        <!-- Header -->
+        <header class="header">
+            <span class="date-badge">2025 / 12 / 26</span>
+            <h1>美國市場收盤報告</h1>
+            <p class="subtitle">市場情緒與趨勢摘要</p>
+            <span class="trend-tag">數據更新</span>
+        </header>
+
+        <!-- 1. 主要指數 (Core Indices) -->
+        <section class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-chart-line"></i> 主要指數
+            </div>
+            <div class="indices-grid">
+                <!-- 範例 Card -->
+                <div class="index-card down">
+                    <div class="index-name">S&P 500</div>
+                    <div class="index-price">0,000.00</div>
+                    <div class="index-change text-red"><i class="fa-solid fa-caret-down"></i> 0.00%</div>
+                </div>
+                <!-- 更多指數由 AI 生成 -->
+            </div>
+        </section>
+
+        <!-- 2. 板塊 ETF (Sector ETFs) -->
+        <section class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-layer-group"></i> 板塊 ETF
+            </div>
+            <div class="sector-flex">
+                <div class="sector-column">
+                    <h3 class="text-green">表現強勢</h3>
+                    <!-- 範例 Sector Item -->
+                    <div class="sector-item bg-green-soft">
+                        <span><i class="fa-solid fa-bolt"></i> Sector Name</span>
+                        <span>+0.0%</span>
+                    </div>
+                </div>
+                <div class="sector-column">
+                    <h3 class="text-red">表現弱勢</h3>
+                    <div class="sector-item bg-red-soft">
+                        <span><i class="fa-solid fa-building"></i> Sector Name</span>
+                        <span>-0.0%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 債券利率 (Treasury Rates) -->
+        <section class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-building-columns"></i> 債券利率
+            </div>
+            <div class="indices-grid">
+                <div class="index-card">
+                    <div class="index-name">US 2Y</div>
+                    <div class="index-price">0.00</div>
+                    <div class="index-change">0.00%</div>
+                </div>
+                <div class="index-card">
+                    <div class="index-name">US 10Y</div>
+                    <div class="index-price">0.00</div>
+                    <div class="index-change">0.00%</div>
+                </div>
+                <div class="index-card">
+                    <div class="index-name">US 30Y</div>
+                    <div class="index-price">0.00</div>
+                    <div class="index-change">0.00%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 漲幅最高股票及新聞 (Top Movers & News) -->
+        <section class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-fire"></i> 漲幅最高股票及新聞
+            </div>
+            <div class="movers-grid">
+                <!-- 範例 Mover Card -->
+                <div class="mover-card">
+                    <div class="mover-top">
+                        <span class="mover-symbol text-red">AAPL</span>
+                        <span class="mover-change text-red">-0.0%</span>
+                    </div>
+                    <div class="mover-reason">
+                        此處填入新聞摘要...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 跌幅最高股票及新聞 (Top Movers & News) -->
+        <section class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-fire"></i> 跌幅最高股票及新聞
+            </div>
+            <div class="movers-grid">
+                <!-- 範例 Mover Card -->
+                <div class="mover-card">
+                    <div class="mover-top">
+                        <span class="mover-symbol text-red">AAPL</span>
+                        <span class="mover-change text-red">-0.0%</span>
+                    </div>
+                    <div class="mover-reason">
+                        此處填入新聞摘要...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 市場回顧 (Market Recap) -->
+        <section class="section">
+            <div class="section-title">
+                <i class="fa-solid fa-newspaper"></i> 市場回顧
+            </div>
+            <div class="story-container">
+                <!-- 標題可選，或由重點第一項取代 -->
+                <ul class="story-points">
+                    <li><strong>重點標題：</strong> 重點內容描述...</li>
+                    <li><strong>重點標題：</strong> 重點內容描述...</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer class="footer">
+            Generated by AI Financial Analyst | Data Source: Market Closure
+        </footer>
+    </div>
+
+</body>
+
+</html>

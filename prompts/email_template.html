@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body
+    style="margin: 0; padding: 0; background-color: #ffffff; font-family: 'Helvetica', 'Arial', sans-serif; color: #333333;">
+    <!-- Embedded Full-Width Styles for Ghost -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .gh-content,
+        .gh-canvas,
+        .post-content,
+        .kg-width-wide,
+        .kg-width-full {
+            max-width: none !important;
+            width: 100vw !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow-x: hidden !important;
+        }
+
+        table {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Remove preview padding if possible */
+        .gh-post-preview-content {
+            padding: 0 !important;
+        }
+
+        /* Mobile Responsiveness */
+        @media only screen and (max-width: 600px) {
+            .sector-col {
+                display: block !important;
+                width: 100% !important;
+                padding-bottom: 20px;
+            }
+
+            .spacer-col {
+                display: none !important;
+            }
+
+            /* Stack Indices and Treasury items vertically */
+            .indices-row,
+            .treasury-row {
+                display: block !important;
+            }
+
+            .indices-row>td,
+            .treasury-row>td {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 10px;
+                padding: 10px !important;
+                border: 1px solid #eee;
+                border-radius: 5px;
+            }
+
+
+            /* Text Wrapping Fixes */
+            .footer-text {
+                font-size: 9px !important;
+                white-space: nowrap !important;
+            }
+
+            .header-title {
+                font-size: 16px !important;
+                white-space: nowrap !important;
+            }
+
+            .index-name {
+                white-space: nowrap !important;
+                font-size: 11px !important;
+            }
+
+            /* Bilingual Header Break */
+            .en-subtitle {
+                display: block !important;
+                margin-top: 2px !important;
+                margin-left: 0 !important;
+                font-size: 14px !important;
+                /* Slightly smaller for subtitle look */
+                white-space: normal !important;
+                /* Allow wrapping if needed, or keep nowrap */
+            }
+
+        }
+
+        /* Force Fixed Table Layout for Alignment */
+        .indices-table,
+        .sector-strong,
+        .sector-weak,
+        .treasury-table {
+            table-layout: fixed !important;
+            width: 100% !important;
+        }
+
+        /* Table Column Alignment (Enforced Globally) */
+        .indices-table td:nth-child(1),
+        .sector-strong td:nth-child(1),
+        .sector-weak td:nth-child(1),
+        .treasury-table td:nth-child(1) {
+            width: 50% !important;
+        }
+
+        .indices-table td:nth-child(2),
+        .sector-strong td:nth-child(2),
+        .sector-weak td:nth-child(2),
+        .treasury-table td:nth-child(2) {
+            width: 25% !important;
+            text-align: right !important;
+        }
+
+        .indices-table td:nth-child(3),
+        .sector-strong td:nth-child(3),
+        .sector-weak td:nth-child(3),
+        .treasury-table td:nth-child(3) {
+            width: 25% !important;
+            text-align: right !important;
+        }
+    </style>
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%"
+        style="width: 100%; background-color: #ffffff; margin: 0; border: none;">
+
+        <!-- 1. INDICES -->
+        <tr>
+            <td style="padding: 30px 20px; border-bottom: 1px solid #eeeeee;">
+                <h2
+                    style="margin-top: 0; color: #1a237e; font-size: 16px; border-left: 4px solid #1a237e; padding-left: 10px;">
+                    主要指數 <span class="en-subtitle">(Core Indices)</span>
+                </h2>
+                <!-- Indices Table (3 Columns) -->
+                <!-- Indices Table (List View) -->
+                <table width="100%" cellpadding="0" cellspacing="0" class="indices-table"
+                    style="table-layout: fixed; width: 100%;">
+                    <!-- Gemini will fill <tr> rows here -->
+                    <!-- Example:
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 15px 0; color: #555; font-weight: bold;">S&P 500</td>
+                        <td align="right" style="padding: 15px 0; font-size: 16px;">4,500.00</td>
+                        <td align="right" style="padding: 15px 0; color: green; font-weight: bold;">+1.20%</td>
+                    </tr>
+                    -->
+                </table>
+            </td>
+        </tr>
+
+        <!-- 2. SECTORS -->
+        <tr>
+            <td style="padding: 30px 20px; border-bottom: 1px solid #eeeeee;">
+                <h2
+                    style="margin-top: 0; color: #1a237e; font-size: 16px; border-left: 4px solid #1a237e; padding-left: 10px;">
+                    板塊表現 <span class="en-subtitle">(Sector ETFs)</span>
+                </h2>
+                <!-- Sector Tables (List View - Stacked) -->
+                <!-- Strong Sectors -->
+                <h3 style="color: #00c853; margin-bottom: 10px; margin-top: 0;">表現強勢</h3>
+                <table width="100%" cellpadding="0" cellspacing="0" class="sector-strong"
+                    style="table-layout: fixed; width: 100%;">
+                    <!-- Gemini fills <tr> rows similar to Indices -->
+                </table>
+
+                <div style="height: 20px;"></div>
+
+                <!-- Weak Sectors -->
+                <h3 style="color: #ff1744; margin-bottom: 10px; margin-top: 0;">表現弱勢</h3>
+                <table width="100%" cellpadding="0" cellspacing="0" class="sector-weak"
+                    style="table-layout: fixed; width: 100%;">
+                    <!-- Gemini fills <tr> rows -->
+                </table>
+            </td>
+        </tr>
+
+        <!-- 3. TREASURY -->
+        <tr>
+            <td style="padding: 30px 20px; border-bottom: 1px solid #eeeeee;">
+                <h2
+                    style="margin-top: 0; color: #1a237e; font-size: 16px; border-left: 4px solid #1a237e; padding-left: 10px;">
+                    債券利率 <span class="en-subtitle">(Treasury)</span>
+                </h2>
+                <table width="100%" cellpadding="0" cellspacing="5" class="treasury-table"
+                    style="table-layout: fixed; width: 100%;">
+                    <tr class="treasury-row">
+                        <!-- Gemini fills 3 columns -->
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <!-- 4. MOVERS -->
+        <tr>
+            <td style="padding: 30px 20px; border-bottom: 1px solid #eeeeee;">
+                <h2
+                    style="margin-top: 0; color: #1a237e; font-size: 16px; border-left: 4px solid #1a237e; padding-left: 10px;">
+                    焦點個股 <span class="en-subtitle">(Biggest Movers)</span>
+                </h2>
+                <table width="100%" cellpadding="0" cellspacing="10" class="movers-table">
+                    <!-- Gemini fills rows, each row acts as a card -->
+                    <!-- 
+                        <tr>
+                            <td style="background-color: #f9f9f9; padding: 15px; border-radius: 8px;">
+                                <strong style="font-size: 18px;">AAPL</strong> <span style="color: green; font-weight:bold;">+2.5%</span>
+                                <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">News summary here...</p>
+                            </td>
+                        </tr> 
+                        -->
+                </table>
+            </td>
+        </tr>
+
+        <!-- 5. RECAP -->
+        <tr>
+            <td style="padding: 30px 20px; background-color: #e8eaf6;">
+                <h2
+                    style="margin-top: 0; color: #1a237e; font-size: 16px; border-left: 4px solid #1a237e; padding-left: 10px;">
+                    市場回顧 <span class="en-subtitle">(Market Recap)</span>
+                </h2>
+                <ul class="recap-list" style="padding-left: 20px; line-height: 1.6; color: #333;">
+                    <!-- Gemini fills <li> items -->
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
