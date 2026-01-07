@@ -8,7 +8,7 @@
     *   **Financial Modeling Prep (FMP)**：獲取即時股價、指數、板塊表現、債券利率 (2Y/10Y/30Y) 及個股新聞。
     *   **Web Scraping (Playwright)**：自動抓取每日市場回顧 (Market Recap) 文章。
 2.  **AI 智能分析**：
-    *   使用 **Google Gemini API** (Gemini 2.0 Flash) 針對市場數據、新聞與文章進行摘要與趨勢分析。
+    *   使用 **Google Gemini API** (Gemini 3.0 Flash) 針對市場數據、新聞與文章進行摘要與趨勢分析。
 3.  **自動化報告生成**：
     *   **Telegram 圖片報告**：將數據填入 HTML 版型，利用 Playwright 自動截圖成高品質圖表，分段發送至 Telegram。
     *   **Email / Blog 草稿 (Ghost)**：(可選) 生成適合 Email 行銷的 HTML 格式，並透過 API 自動在 Ghost Blog 建立草稿。
@@ -20,7 +20,7 @@
 ## 🛠️ 安裝與設定
 
 ### 1. 環境需求
-*   Python 3.10+
+*   Python 3.11+
 *   Google Chrome / Chromium (Playwright 用)
 
 ### 2. 安裝依賴套件
