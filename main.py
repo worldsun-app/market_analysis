@@ -159,6 +159,7 @@ async def generate_html(target_date, market_data, output_dir):
 ### 任務要求：
 1. **嚴格遵守版型**：請勿更改 HTML 的 CSS 樣式、結構、class 名稱。
 2. **數據準確性**：將報告中的指數數值、漲跌幅、新聞內容填入對應的模塊。
+(針對「最大變動個股」與「板塊」區域，請務必根據提供的資料數量，動態生成對應數量的 HTML 卡片或行 (例如：如果有 6 支上漲股，就必須生成 6 個 .mover-card))
 3. **動態判斷**：
    - **顏色規則**：針對所有漲跌幅、變動率或利率變動數值 (包含指數、債券、板塊、個股)：
      - **數值 > 0**：必須使用 `text-green` class，並搭配向上箭頭 `<i class="fa-solid fa-caret-up"></i>`，卡片背景/邊框若有相關設定請設為 `up` 或 `bg-green-soft`。
@@ -459,7 +460,7 @@ async def scheduler():
     while True:
         now = datetime.datetime.now()
         # 設定目標時間為今天的 06:00
-        target_time = now.replace(hour=6, minute=0, second=0, microsecond=0)
+        target_time = now.replace(hour=5, minute=55, second=0, microsecond=0)
         
         # 如果現在已經過了 06:00，目標設為明天 06:00
         if now >= target_time:
@@ -482,7 +483,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="美股分析自動化機器人")
     parser.add_argument("--schedule", action="store_true", help="啟用排程模式 (每天早上 6:00 執行)")
     args = parser.parse_args()
-    args.schedule = True
 
     try:
         if args.schedule:
