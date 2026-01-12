@@ -480,7 +480,14 @@ async def scheduler():
         # 等待直到目標時間
         await asyncio.sleep(wait_seconds)
         
-        print(f"\n[⏰] 時間到！開始執行任務: {datetime.datetime.now().strftime('%Y-%m-%d')}")
+        print(f"\n[⏰] 時間到！開始執行任務: {datetime.datetime.now(tz).strftime('%Y-%m-%d')}")
+        
+        # 檢查是否為週日 (6) 或週一 (0) -> 對應美股的週六與週日休市
+        current_weekday = datetime.datetime.now(tz).weekday()
+        if current_weekday in [0, 6]:
+            print(f"[!] 今日是 {'週一' if current_weekday == 0 else '週日'} (美股週末休市)，跳過執行。")
+            continue
+
         await run_automation()
 
 if __name__ == "__main__":
