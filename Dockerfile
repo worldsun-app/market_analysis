@@ -13,7 +13,11 @@ ENV PYTHONUNBUFFERED=1 \
 # However, for the build process, we might need git or build-essential if any package needs compiling.
 RUN apt-get update && apt-get install -y \
     curl \
+    tzdata \
     && rm -rf /var/lib/apt/lists/*
+
+# Set timezone to Asia/Taipei
+ENV TZ=Asia/Taipei
 
 # Copy requirements first to leverage cache
 COPY requirements.txt .

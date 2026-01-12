@@ -11,6 +11,7 @@ from google import genai
 from google.genai import types
 from playwright.async_api import async_playwright
 from telegram import Bot
+from zoneinfo import ZoneInfo
 import json
 
 from fmp_client import FMPClient
@@ -458,8 +459,11 @@ async def scheduler():
     """排程模式：每天 06:00 執行"""
     
     while True:
-        now = datetime.datetime.now()
-        # 設定目標時間為今天的 06:00
+        # 使用 Asia/Taipei 時區
+        tz = ZoneInfo("Asia/Taipei")
+        now = datetime.datetime.now(tz)
+        
+        # 設定目標時間為今天的 05:55 (台北時間)
         target_time = now.replace(hour=5, minute=55, second=0, microsecond=0)
         
         # 如果現在已經過了 06:00，目標設為明天 06:00
